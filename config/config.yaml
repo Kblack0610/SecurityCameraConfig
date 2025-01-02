@@ -1,0 +1,38 @@
+mqtt:
+  enabled: true 
+
+cameras:
+  home: # <------ Name the camera
+    enabled: true
+    ffmpeg:
+      inputs:
+        - path: rtsp://admin:{FRIGATE_HOME_PASSWORD}@192.168.1.123:554/cam/realmonitor?channel=1&subtype=0 # <----- The stream you want to use for detection
+          roles:
+            - detect
+    detect:
+      enabled: true
+      width: 1280
+      height: 720
+  front: # <------ Name the camera
+    enabled: true
+    ffmpeg:
+      inputs:
+        - path: rtsp://admin:{FRIGATE_FRONT_PASSWORD}@192.168.1.226:554/cam/realmonitor?channel=1&subtype=0 # <----- The stream you want to use for detection
+          roles:
+            - detect
+    detect:
+      enabled: true
+      width: 1280
+      height: 720
+objects:
+  # Optional: list of objects to track from labelmap.txt (default: shown below)
+  track:
+    - person
+review:
+  alerts:
+    labels:
+      - person
+  detections:
+    labels:
+      - person
+version: 0.14
